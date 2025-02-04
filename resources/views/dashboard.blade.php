@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <table class="w-full border-collapse border border-gray-200">
+            <table class="w-full border-collapse border border-gray-200 text-white">
                 <thead>
                     <tr class="bg-gray-200">
                         <th class="border border-gray-300 px-4 py-2 text-left">Portaria</th>
