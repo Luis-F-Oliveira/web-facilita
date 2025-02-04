@@ -8,11 +8,13 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::resource('/dashboard', DataController::class)
+Route::get('/dashboard', [DataController::class, 'index'])
     ->middleware(['auth', 'verified'])
-    ->names([
-        'index' => 'dashboard'
-    ]);
+    ->name('dashboard');
+
+Route::get('/dashboard/show', [DataController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
