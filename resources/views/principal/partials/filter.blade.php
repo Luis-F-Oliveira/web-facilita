@@ -6,8 +6,8 @@
       <x-text-input type="date" name="data" class="w-full" value="{{ request('data') }}" />
   </div>
   <div class="w-full flex justify-end mt-4">
-      <a href="{{ route('dashboard.show') }}">
-        <x-secondary-button type="button">Limpar</x-button>
+      <a href="{{ route('dashboard') }}">
+        <x-danger-button type="button">Limpar</x-button>
       </a>
       <x-primary-button class="ml-3" type="submit">Filtrar</x-button>
   </div>

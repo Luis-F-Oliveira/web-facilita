@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
+use App\Http\Controllers\Controller;
 use App\Models\Data;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -10,7 +11,9 @@ class DataController extends Controller
 {
     public function index()
     {
-        $data = Data::with('servant')->paginate(15);
+        $data = Data::with('servant')
+            ->orderBy('created_at', 'desc')
+            ->paginate(15);
 
         return view("principal.index", compact('data'));
     }
