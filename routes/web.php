@@ -26,11 +26,13 @@ Route::middleware('auth')->group(function () {
         ->except(['show'])
         ->names([
             'index' => 'servants',
-            'show' => 'servants.show',
-            'edit' => 'servants.edit'
+            'create' => 'servants.create',
+            'edit' => 'servants.edit',
+            'update' => 'servants.update',
         ]);
 
-    Route::get('servants/show', [ServantsController::class, 'show'])->name('servants.show');
+    Route::get('servants/filter', [ServantsController::class, 'filter'])->name('servants.filter');
+    Route::post('servants/import', [ServantsController::class, 'import'])->name('servants.import');
 });
 
 require __DIR__.'/auth.php';

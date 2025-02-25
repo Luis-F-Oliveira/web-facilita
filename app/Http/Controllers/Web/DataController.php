@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Data;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class DataController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $data = Data::with('servant')
             ->orderBy('created_at', 'desc')
@@ -18,7 +19,7 @@ class DataController extends Controller
         return view("principal.index", compact('data'));
     }
 
-    public function show(Request $request)
+    public function show(Request $request): View
     {
         $query = Data::query()->with('servant');
 
