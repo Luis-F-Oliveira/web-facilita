@@ -1,5 +1,5 @@
 <form class="mb-4 rounded-lg" method="GET" action="{{ route('dashboard.show') }}">
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="grid grid-cols-2 gap-4">
       <x-text-input type="text" name="portaria" placeholder="Portaria" class="w-full" value="{{ request('portaria') }}" />
       <x-text-input type="text" name="nome" placeholder="Nome" class="w-full" value="{{ request('nome') }}" />
       <x-text-input type="email" name="email" placeholder="E-mail" class="w-full" value="{{ request('email') }}" />

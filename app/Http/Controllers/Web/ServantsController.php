@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Imports\ServantsImport;
 use App\Models\Servants;
-use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
@@ -31,7 +29,7 @@ class ServantsController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            "enrollment" => "required|string|unique:servants,enrollment|max:9",
+            "enrollment" => "required|string|unique:servants,enrollment|max:11",
             "contract" => "required|integer",
             "name" => "required|string|regex:/^[a-zA-Z\s]+$/u|max:50",
             "email" => "required|email|max:50|unique:servants,email"
@@ -59,7 +57,7 @@ class ServantsController extends Controller
     {
         $request->validate([
             "enrollment" => [
-                "required","integer",
+                "required","string",
                 Rule::unique('servants', 'enrollment')->ignore($id)
             ],
             "contract" => "required|integer",
@@ -91,7 +89,7 @@ class ServantsController extends Controller
 
         $data = $query->paginate(15)->appends($request->query());
 
-        return view('servants', compact('data', 'filters'));
+        return view('servants.index', compact('data', 'filters'));
     }
 
     public function import(Request $request): RedirectResponse

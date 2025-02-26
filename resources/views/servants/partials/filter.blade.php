@@ -1,5 +1,5 @@
 <form class="mb-4 rounded-lg" method="GET" action="{{ route('servants.filter') }}">
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+  <div class="grid grid-cols-2 gap-4">
     <x-text-input type="number" name="enrollment" placeholder="Matrícula" class="w-full" value="{{ request('enrollment') }}" />
     <x-text-input type="number" name="contract" placeholder="Contrato" class="w-full" value="{{ request('contract') }}" />
     <x-text-input type="text" name="name" placeholder="Name" class="w-full" value="{{ request('name') }}" />
