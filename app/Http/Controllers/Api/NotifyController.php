@@ -5,12 +5,20 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Mail\SendData;
 use App\Models\Data;
+use App\Services\PHPMailerService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class NotifyController extends Controller
 {
+    protected PHPMailerService $mailer;
+
+    public function __construct(PHPMailerService $mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
     public function index(Request $request): JsonResponse
     {
         $date = $request->only('date');
@@ -25,15 +33,25 @@ class NotifyController extends Controller
             $groupedData[$servantId][] = $item;
         }
 
-        foreach ($groupedData as $servantId => $items) {
-        $servant = $items[0]->servant;
-        $email = $servant->email;
-        $date = $items[0]->created_at;
+        $errors = [];
 
-        if ($servant->active) {
-            Mail::to($email)->send(new SendData($items, $servant, $date));
-            continue;
+        foreach ($groupedData as $servantId => $items) {
+            $servant = $items[0]->servant;
+
+            if ($servant->active) {
+                try {
+                    $this->mailer->sendEmail($items, $servant, $items[0]->created_at);
+                } catch (\Exception $e) {
+                    $errors[] = "Erro ao enviar e-mail para {$servant->email}: {$e->getMessage()}";
+                }
+            }
         }
+
+        if (!empty($errors)) {
+            return response()->json([
+                'message' => 'Alguns e-mails não puderam ser enviados.',
+                'errors' => $errors,
+            ], 500);
         }
 
         return response()->json([
