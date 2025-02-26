@@ -31,7 +31,7 @@ class ServantsController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            "enrollment" => "required|integer|unique:servants,enrollment",
+            "enrollment" => "required|string|unique:servants,enrollment|max:9",
             "contract" => "required|integer",
             "name" => "required|string|regex:/^[a-zA-Z\s]+$/u|max:50",
             "email" => "required|email|max:50|unique:servants,email"
