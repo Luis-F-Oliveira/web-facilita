@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Web\DataController;
 use App\Http\Controllers\Web\ProfileController;
+use App\Http\Controllers\Web\RedirectController;
 use App\Http\Controllers\Web\ServantsController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('servants/filter', [ServantsController::class, 'filter'])->name('servants.filter');
     Route::post('servants/import', [ServantsController::class, 'import'])->name('servants.import');
+
+    Route::get('redirect/{id}', [RedirectController::class, 'index']);
 });
 
 require __DIR__.'/auth.php';
