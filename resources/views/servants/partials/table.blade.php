@@ -12,18 +12,18 @@
   <tbody class="divide-y divide-gray-200 dark:divide-neutral-700">
     @foreach ($data as $item)
     <tr>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ $item->enrollment }}</td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ $item->contract }}</td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ $item->name }}</td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">{{ $item->email }}</td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+      <td class="px-6 py-4 text-sm font-medium">{{ $item->enrollment }}</td>
+      <td class="px-6 py-4 text-sm font-medium">{{ $item->contract }}</td>
+      <td class="px-6 py-4 text-sm font-medium">{{ $item->name }}</td>
+      <td class="px-6 py-4 text-sm font-medium">{{ $item->email }}</td>
+      <td class="px-6 py-4 text-sm font-medium">
         @if ($item->active)
           <span>Ativo</span>
         @else
           <span>Inativo</span>
         @endif
       </td>
-      <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+      <td class="px-6 py-4 text-end text-sm font-medium">
         <a href="{{ route('servants.edit', $item->id) }}">
           <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent focus:outline-none disabled:opacity-50 disabled:pointer-events-none">
             Editar
