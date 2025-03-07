@@ -17,6 +17,8 @@ Route::get('/dashboard', [DataController::class, 'index'])
 Route::get('/dashboard/show', [DataController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard.show');
+    
+Route::get('redirect/{id}', [RedirectController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,7 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::get('servants/filter', [ServantsController::class, 'filter'])->name('servants.filter');
     Route::post('servants/import', [ServantsController::class, 'import'])->name('servants.import');
 
-    Route::get('redirect/{id}', [RedirectController::class, 'index']);
 });
 
 require __DIR__.'/auth.php';
